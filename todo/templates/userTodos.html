@@ -1,0 +1,29 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Current Tasks</h1>
+
+<h5><a href="{% url 'completedTodosPage' %}">Show All Completed Todos</a></h5> <br>
+    
+<ul>
+{% for todo in todos %}
+    {% if todo.important %}
+{#        the reason we are using todo.id after the viewTodo is viewTodo url needs and int number as we set in ulrs.py so it needs and int number and we give the object id as the number#}
+        <li><h3><b><a href="{% url 'viewTodo' todo.id %}">{{ todo.title }}</a></b></h3></li>
+        <p>{{ todo.memo|safe|truncatewords:5 }}</p> <br>   <!--showing a small part of memo for preview-->
+    {% else %}
+        <li><h3><a href="{% url 'viewTodo' todo.id %}">{{ todo.title }}</a></h3></li>
+        <p>{{ todo.memo|safe|truncatewords:5 }}</p><br>
+    {% endif %}
+    {% endfor %}
+</ul>    
+    
+    
+    <form action="{% url 'createToDo' %}" method="GET">
+        {% csrf_token %}
+        <button type="submit">New Task</button>
+    </form>
+{% endblock %}
+

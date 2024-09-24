@@ -1,0 +1,37 @@
+
+
+<!--user.is_authenticated: It checks if the user is authenticated (logged in) and then conditionally renders content based on that authentication status. the return type is True or False -->
+{% if user.is_authenticated %}      <!--the user is already passed like a dictionary and we dont need to do anything--> <!--if the user login to this page or not-->
+
+Logged In as {{ user.username }} <br>
+    
+   
+
+
+{#Anything betwenn href is a GET and not POST because any time you go to a url,#}
+{#it's a GET, although we should not logout with <a> tag#}
+{#<a href="{% url 'logoutuser' %}">Logout</a> <br> #}
+
+<!--for logging out: -->
+<form action="{% url 'logoutuser' %}" method="POST">
+    {% csrf_token %}   <!--we have to have it here(csrf token)-->
+    <button type="submit">Logout</button>
+</form>     <br> 
+    
+    
+    <a href="{% url 'createToDo' %}">Create</a> <br>
+    <a href="{% url 'userTodosPage' %}">User Todos</a>  <br>
+    <a href="{% url 'completedTodosPage' %}">Completed Todos</a>    <br>
+
+
+{% else %}      <!--if the user not logged in-->
+
+<a href="{% url 'signupuser' %}">Sign Up</a> <br>
+<a href="{% url 'loginuser' %}">Login</a>
+
+{% endif %}
+
+{% block content %}{% endblock %}
+
+
+

@@ -1,0 +1,22 @@
+
+
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>new task here</h1> <br>
+    
+    {{ error }}
+<!-- when we are in createTodo page we can change the Title text size by inspecting (inspect) the page in browser and change the maxlength -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button><br>
+    </form>
+        
+    
+{#    {{ user.username }}#}
+{% endblock %}
+

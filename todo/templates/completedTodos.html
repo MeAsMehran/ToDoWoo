@@ -1,0 +1,46 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+    {{ error }}
+
+    <h1>Completed Todos</h1>
+    <ul>
+        {% for todo in todos %}
+        <li><h2><a href="">{{ todo.title }}</a></h2></li>
+        <p>{{ todo.memo }}</p>
+        <h5>{{ todo.createdDate }}</h5>
+        <h5>{{ todo.targetDate }}</h5>
+
+            <form action="{% url 'undoTodo' todo.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Undo</button>
+            </form>
+
+            <br> <br> <br>
+        {% endfor %}
+    </ul>
+
+<ul>
+    {% for todo in todos %}
+    {% if todo.important %}
+{#        the reason we are using todo.id after the viewTodo is viewTodo url needs and int number as we set in ulrs.py so it needs and int number and we give the object id as the number#}
+        <li><h3><b><a href="{% url 'viewTodo' todo.id %}">{{ todo.title }}</a></b></h3></li>
+        <p>{{ todo.memo|safe|truncatewords:5 }}</p> <br>   <!--showing a small part of memo for preview-->
+    {% else %}
+        <li><h3><a href="{% url 'viewTodo' todo.id %}">{{ todo.title }}</a></h3></li>
+        <p>{{ todo.memo|safe|truncatewords:5 }}</p><br>
+    {% endif %}
+
+        <form action="{% url 'undoTodo' todo.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Undo</button>
+        </form>
+
+    {% endfor %}
+</ul>
+    
+
+{% endblock %}
+
