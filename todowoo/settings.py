@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d-wpbe9+6=*t#-1o-%g5^rkoxdr42x*p6-7m34sfgfotk%5j=!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['mehran2099.pythonanywhere.com']       # WE ADDED HERE: THIS IS FOR GIVING THE WEBSITE ADDRESS WHICH WE CREATED BY PYTHONANYWHERE SITE.
 
